@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'features/splash/presentation/pages/splash.dart';
-import 'features/auth/presentation/pages/login.dart';
-import 'features/auth/presentation/pages/registro.dart';
-import 'features/auth/presentation/pages/recordar_contra.dart';
-import 'features/dashboard/presentation/pages/dasboard.dart';
+import 'core/routes/app_routes.dart';
+import 'core/theme/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,30 +14,30 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'App',
-
-      // MODO CLARO
+      title: 'UserMaster',
       theme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.light,
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          primary: AppColors.primary,
+          surface: AppColors.surface,
+        ),
+        scaffoldBackgroundColor: AppColors.background,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.white,
+          elevation: 0,
+          centerTitle: true,
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(foregroundColor: AppColors.primary),
+        ),
+        progressIndicatorTheme:
+            const ProgressIndicatorThemeData(color: AppColors.primary),
       ),
-
-      initialRoute: '/',
-
-      routes: {
-        '/': (context) => const SplashPage(),
-
-        '/login': (context) => const Login(),
-
-        '/registro': (context) => const Register(),
-
-        '/recuperar': (context) =>
-            const ForgotPassword(),
-
-        '/dashboard': (context) =>
-        Dashboard(),
-      },
+      initialRoute: AppRoutes.splash,
+      routes: AppRoutes.routes,
     );
   }
 }
